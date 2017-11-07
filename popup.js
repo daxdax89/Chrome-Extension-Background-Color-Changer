@@ -8,7 +8,7 @@
  * @param {function(string)} callback called when the URL of the current tab
  *   is found.
  */
-function getCurrentTabUrl(callback) {
+ function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
   var queryInfo = {
@@ -52,7 +52,7 @@ function getCurrentTabUrl(callback) {
  *
  * @param {string} color The new background color.
  */
-function changeBackgroundColor(color) {
+ function changeBackgroundColor(color) {
   var script = 'document.body.style.backgroundColor="' + color + '";';
   // See https://developer.chrome.com/extensions/tabs#method-executeScript.
   // chrome.tabs.executeScript allows us to programmatically inject JavaScript
@@ -71,7 +71,7 @@ function changeBackgroundColor(color) {
  * @param {function(string)} callback called with the saved background color for
  *     the given url on success, or a falsy value if no color is retrieved.
  */
-function getSavedBackgroundColor(url, callback) {
+ function getSavedBackgroundColor(url, callback) {
   // See https://developer.chrome.com/apps/storage#type-StorageArea. We check
   // for chrome.runtime.lastError to ensure correctness even when the API call
   // fails.
@@ -86,7 +86,7 @@ function getSavedBackgroundColor(url, callback) {
  * @param {string} url URL for which background color is to be saved.
  * @param {string} color The background color to be saved.
  */
-function saveBackgroundColor(url, color) {
+ function saveBackgroundColor(url, color) {
   var items = {};
   items[url] = color;
   // See https://developer.chrome.com/apps/storage#type-StorageArea. We omit the
@@ -121,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdown.addEventListener('change', () => {
       changeBackgroundColor(dropdown.value);
       saveBackgroundColor(url, dropdown.value);
+      console.log('Selected color: ' + dropdown.value);
+
     });
   });
 });
